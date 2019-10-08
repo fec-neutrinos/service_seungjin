@@ -1,17 +1,39 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
+  "name": "service_seungjin",
+  "description": "> Project description",
   "author": "",
-  "license": "",
+  "license": "ISC",
   "engines": {
     "node": ">=6.13.0"
   },
   "scripts": {
+    "react-dev": "webpack -d --watch",
+    "server-dev": "nodemon server/app.js",
+    "build": "webpack --config webpack.config.js"
   },
   "dependencies": {
+    "express": "^4.17.1"
   },
   "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
-  }
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git",
+    "nodemon": "^1.19.3",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9"
+  },
+  "version": "1.0.0",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fec-neutrinos/service_seungjin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fec-neutrinos/service_seungjin/issues"
+  },
+  "homepage": "https://github.com/fec-neutrinos/service_seungjin#readme"
 }
