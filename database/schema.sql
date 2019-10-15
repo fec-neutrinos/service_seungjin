@@ -7,12 +7,12 @@
 
 -- ---
 -- Table 'Products'
--- 
+--
 -- ---
 USE fec;
 
 DROP TABLE IF EXISTS `Products`;
-		
+
 CREATE TABLE `Products` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
@@ -23,11 +23,11 @@ CREATE TABLE `Products` (
 
 -- ---
 -- Table 'Categories'
--- 
+--
 -- ---
 
 DROP TABLE IF EXISTS `Categories`;
-		
+
 CREATE TABLE `Categories` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
@@ -36,11 +36,11 @@ CREATE TABLE `Categories` (
 
 -- ---
 -- Table 'Searches'
--- 
+--
 -- ---
 
 DROP TABLE IF EXISTS `Searches`;
-		
+
 CREATE TABLE `Searches` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
@@ -49,10 +49,13 @@ CREATE TABLE `Searches` (
 );
 
 -- ---
--- Foreign Keys 
+-- Foreign Keys
 -- ---
 
 ALTER TABLE `Products` ADD FOREIGN KEY (id_Categories) REFERENCES `Categories` (`id`);
+ALTER TABLE 'Categories' ADD unique index(name);
+
+
 
 -- ---
 -- Table Properties

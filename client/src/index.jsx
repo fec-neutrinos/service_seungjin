@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom';
 
 const App = () => {
   return (
-    <div>
-      <p>React here!</p>
-    </div>
+    <form action="" method="post">
+      <input type="text" name="search" id="search" placeholder="Search..."></input>
+    </form>
   );
 };
 
