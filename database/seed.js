@@ -53,3 +53,12 @@ const seedProducts = () => {
 
 
 
+const promise1 = new Promise(function(resolve, reject) {
+  seed();
+  resolve("Success!");
+});
+
+promise1.then(function(value) {
+  seedProducts();
+  console.log(value);
+})
