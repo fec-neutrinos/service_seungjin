@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 // import SearchBar from 'material-ui-search-bar'
@@ -28,25 +27,25 @@ const languages = [
   },
 ];
 
-// https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Special_Characters
 function escapeRegexCharacters(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 function getSuggestions(value) {
-  const escapedValue = escapeRegexCharacters(value.trim());
+  // const escapedValue = escapeRegexCharacters(value.trim());
+  // const regex = new RegExp('^' + escapedValue, 'i');
 
-  if (escapedValue === '') {
-    return [];
-  }
+  // return languages.filter(language => regex.test(language.name));
 
-  const regex = new RegExp('^' + escapedValue, 'i');
-
-  return languages.filter(language => regex.test(language.name));
+  return
 }
 
 function getSuggestionValue(suggestion) {
   return suggestion.name;
+}
+
+function shouldRenderSuggestions() {
+  return true;
 }
 
 function renderSuggestion(suggestion) {
@@ -55,6 +54,10 @@ function renderSuggestion(suggestion) {
   );
 }
 
+
+
+
+// Keep this
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -65,26 +68,41 @@ class App extends React.Component {
     };
   }
 
-  // onChange = (_, { newValue }) => {
-  //   const { id, onChange } = this.props;
+  componentDidMount() {
 
-  //   this.setState({
-  //     value: newValue
-  //   });
+  }
 
-  //   onChange(id, newValue);
-  // };
+  // Keep this
+  toggleSearch = () => {
+    let {toggleSearch} = this.state;
+    this.setState({
+      toggleSearch: !toggleSearch
+    })
+  }
 
-  onChange = (event, { newValue }) => {
+  onChange = (event, { newValue, method }) => {
     this.setState({
       value: newValue
     });
   };
 
   onSuggestionsFetchRequested = ({ value }) => {
-    this.setState({
-      suggestions: getSuggestions(value)
-    });
+    const data = {input: value}
+    fetch('/search', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(data => this.setState({ suggestions: data }))
+      .then(response => console.log('success:', JSON.stringify(response)))
+      .catch(err => console.error('error:', err));
+
+    // this.setState({
+    //   suggestions: getSuggestions(value)
+    // });
   };
 
   onSuggestionsClearRequested = () => {
@@ -93,32 +111,41 @@ class App extends React.Component {
     });
   };
 
-  toggleSearch = () => {
-    let {toggleSearch} = this.state;
-    this.setState({
-      toggleSearch: !toggleSearch
-    })
-  }
+
 
 
   render() {
 
-    const { id, placeholder } = this.props;
     const { value, suggestions } = this.state;
     const inputProps = {
-      placeholder: 'Search...',
+      placeholder: "Search...",
       value,
       onChange: this.onChange
     };
 
+
+
     return (
       <div>
-
       <IconButton onClick={() => this.toggleSearch()}>
         <SearchIcon />
       </IconButton>
 
-      {this.state.toggleSearch &&
+
+      <Autosuggest
+        suggestions={suggestions}
+        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        getSuggestionValue={getSuggestionValue}
+        shouldRenderSuggestions={shouldRenderSuggestions}
+        renderSuggestion={renderSuggestion}
+        inputProps={inputProps} />
+
+
+
+
+
+      {/* {this.state.toggleSearch &&
       <Autosuggest
         id={id}
         suggestions={suggestions}
@@ -128,7 +155,7 @@ class App extends React.Component {
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
       />
-      }
+      } */}
 
 
 

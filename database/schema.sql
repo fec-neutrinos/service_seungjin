@@ -53,8 +53,8 @@ CREATE TABLE `Searches` (
 -- ---
 
 ALTER TABLE `Products` ADD FOREIGN KEY (id_Categories) REFERENCES `Categories` (`id`);
-ALTER TABLE `Categories` ADD unique index(name);
-ALTER TABLE `Products` ADD unique index(name);
+-- ALTER TABLE `Categories` ADD unique index(name);
+-- ALTER TABLE `Products` ADD unique index(name);
 
 
 

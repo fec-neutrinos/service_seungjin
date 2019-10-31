@@ -34,10 +34,8 @@ const seed = () => {
     console.log('Searches data successfully inserted');
   })
 
-}
 
-// seed products table
-const seedProducts = () => {
+  // seed Products table
   const productsArray = [];
   const statusArray = ['Active', null];
 
@@ -51,14 +49,32 @@ const seedProducts = () => {
   });
 }
 
+// // seed products table
+// const seedProducts = () => {
+//   const productsArray = [];
+//   const statusArray = ['Active', null];
+
+//   for (var i = 0; i < 100; i++) {
+//     productsArray.push([faker.commerce.productName(), statusArray[Math.floor(Math.random() * statusArray.length)], getRandomNumber(1,11)]);
+//   };
+
+//   db.connection.query('INSERT INTO products(name, status, id_Categories) VALUES ?', [productsArray], (err, res) => {
+//     if (err) throw err;
+//     console.log('Product data successfully inserted');
+//   });
+// }
 
 
-const promise1 = new Promise(function(resolve, reject) {
-  seed();
-  resolve("Success!");
-});
+seed();
 
-promise1.then(function(value) {
-  seedProducts();
-  console.log(value);
-})
+
+
+// const promise1 = new Promise(function(resolve, reject) {
+//   seed();
+//   resolve("Success!");
+// });
+
+// promise1.then(function(value) {
+//   seedProducts();
+//   console.log(value);
+// })
