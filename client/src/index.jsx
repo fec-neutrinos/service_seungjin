@@ -1,3 +1,4 @@
+import { makeStyles } from "@material-ui/core/styles";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import IconButton from '@material-ui/core/IconButton';
@@ -7,25 +8,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import Autosuggest from 'react-autosuggest';
 // import $ from 'jquery';
 import css from '../dist/style.css';
+import Grid from '@material-ui/core/Grid';
 
-// const languages = [
-//   {
-//     name: 'C',
-//     year: 1972
-//   },
-//   {
-//     name: 'C#',
-//     year: 2000
-//   },
-//   {
-//     name: 'C++',
-//     year: 1983
-//   },
-//   {
-//     name: 'Clojure',
-//     year: 2007
-//   },
-// ];
+
 
 function escapeRegexCharacters(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -163,13 +148,22 @@ class App extends React.Component {
 
 
 
+
+
     return (
       <div>
-        <IconButton onClick={() => this.toggleSearch()}>
-          <SearchIcon />
-        </IconButton>
+        <Grid container alignItems="flex-start" justify="flex-end" direction="row">
+          <IconButton
+            edge="end"
+            disableRipple
+            color="inherit"
+            onClick={() => this.toggleSearch()}>
+            <SearchIcon />
+          </IconButton>
 
+        </Grid>
 
+        {this.state.toggleSearch &&
         <Autosuggest
           suggestions={suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -178,22 +172,11 @@ class App extends React.Component {
           shouldRenderSuggestions={shouldRenderSuggestions}
           renderSuggestion={renderSuggestion}
           inputProps={inputProps} />
+        }
 
 
 
 
-
-        {/* {this.state.toggleSearch &&
-      <Autosuggest
-        id={id}
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        inputProps={inputProps}
-      />
-      } */}
 
 
 

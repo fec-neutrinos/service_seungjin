@@ -47,7 +47,7 @@ app.post('/search', (req, res) => {
       return res.send(err);
     } else {
       console.log('query result', result);
-      res.send(getSuggestions(name, result));
+      res.send(getSuggestions(name, result))
     }
   })
 })
