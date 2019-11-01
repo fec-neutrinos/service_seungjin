@@ -8,24 +8,24 @@ import Autosuggest from 'react-autosuggest';
 // import $ from 'jquery';
 import css from '../dist/style.css';
 
-const languages = [
-  {
-    name: 'C',
-    year: 1972
-  },
-  {
-    name: 'C#',
-    year: 2000
-  },
-  {
-    name: 'C++',
-    year: 1983
-  },
-  {
-    name: 'Clojure',
-    year: 2007
-  },
-];
+// const languages = [
+//   {
+//     name: 'C',
+//     year: 1972
+//   },
+//   {
+//     name: 'C#',
+//     year: 2000
+//   },
+//   {
+//     name: 'C++',
+//     year: 1983
+//   },
+//   {
+//     name: 'Clojure',
+//     year: 2007
+//   },
+// ];
 
 function escapeRegexCharacters(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -37,8 +37,46 @@ function getSuggestions(value) {
 
   // return languages.filter(language => regex.test(language.name));
 
-  return
+  const inputValue = value.trim().toLowerCase();
+  const inputLength = inputValue.length;
+
+  if (inputLength === 0) {
+    return [];
+  }
+
+  return temp.filter(student => {
+    return temp.name.split(' ').some(term => {
+      return term.toLowerCase().slice(0, inputLength) === inputValue;
+    })
+  });
+
+
+  // let temp = []
+
+  // const data = { input: value }
+  // fetch('/search', {
+  //   method: 'POST',
+  //   body: JSON.stringify(data),
+  //   headers: {
+  //     'Content-Type': 'application/json'
+  //   }
+  // })
+  // .then(res => res.json())
+  // .then( (data) => {
+  //   return data.filter(product => {
+  //     return product.name.split(' ').some(term => {
+  //       return term.toLowerCase().slice(0, inputLength) === inputValue;
+  //     })
+  //   });
+  // })
+  // .then(response => console.log('success:', JSON.stringify(response)))
+  // .catch(err => console.error('error:', err));
+
+
+  // console.log("temp variable", temp);
+
 }
+
 
 function getSuggestionValue(suggestion) {
   return suggestion.name;
@@ -59,8 +97,8 @@ function renderSuggestion(suggestion) {
 
 // Keep this
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       value: '',
       suggestions: [],
@@ -74,7 +112,7 @@ class App extends React.Component {
 
   // Keep this
   toggleSearch = () => {
-    let {toggleSearch} = this.state;
+    let { toggleSearch } = this.state;
     this.setState({
       toggleSearch: !toggleSearch
     })
@@ -87,7 +125,7 @@ class App extends React.Component {
   };
 
   onSuggestionsFetchRequested = ({ value }) => {
-    const data = {input: value}
+    const data = { input: value }
     fetch('/search', {
       method: 'POST',
       body: JSON.stringify(data),
@@ -127,25 +165,25 @@ class App extends React.Component {
 
     return (
       <div>
-      <IconButton onClick={() => this.toggleSearch()}>
-        <SearchIcon />
-      </IconButton>
+        <IconButton onClick={() => this.toggleSearch()}>
+          <SearchIcon />
+        </IconButton>
 
 
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={getSuggestionValue}
-        shouldRenderSuggestions={shouldRenderSuggestions}
-        renderSuggestion={renderSuggestion}
-        inputProps={inputProps} />
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          getSuggestionValue={getSuggestionValue}
+          shouldRenderSuggestions={shouldRenderSuggestions}
+          renderSuggestion={renderSuggestion}
+          inputProps={inputProps} />
 
 
 
 
 
-      {/* {this.state.toggleSearch &&
+        {/* {this.state.toggleSearch &&
       <Autosuggest
         id={id}
         suggestions={suggestions}

@@ -23,18 +23,31 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //   }
 // });
 
+function escapeRegexCharacters(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function getSuggestions(value, result) {
+  const escapedValue = escapeRegexCharacters(value.trim());
+  const regex = new RegExp('^' + escapedValue, 'i');
+
+  return result.filter(product => regex.test(product.name));
+}
+
+
 app.get('/', (req, res) => {
   res.send(200);
 })
 
 app.post('/search', (req, res) => {
   console.log('req body', req.body);
+  let name = req.body.input
   db.connection.query('SELECT name FROM products', (err, result) => {
     if (err) {
       return res.send(err);
     } else {
-      console.log('query result', result)
-      res.send(result)
+      console.log('query result', result);
+      res.send(getSuggestions(name, result));
     }
   })
 })
