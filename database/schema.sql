@@ -17,7 +17,7 @@ CREATE TABLE `Products` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `status` VARCHAR(255) NULL DEFAULT NULL,
-  `id_Categories` INTEGER NOT NULL,
+  -- `id_Categories` INTEGER NOT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -52,7 +52,7 @@ CREATE TABLE `Searches` (
 -- Foreign Keys
 -- ---
 
-ALTER TABLE `Products` ADD FOREIGN KEY (id_Categories) REFERENCES `Categories` (`id`);
+-- ALTER TABLE `Products` ADD FOREIGN KEY (id_Categories) REFERENCES `Categories` (`id`);
 -- ALTER TABLE `Categories` ADD unique index(name);
 -- ALTER TABLE `Products` ADD unique index(name);
 
