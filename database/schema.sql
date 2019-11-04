@@ -9,6 +9,8 @@
 -- Table 'Products'
 --
 -- ---
+DROP DATABASE IF EXISTS `fec`;
+CREATE DATABASE `fec`;
 USE fec;
 
 DROP TABLE IF EXISTS `Products`;

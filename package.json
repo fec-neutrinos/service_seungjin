@@ -7,6 +7,7 @@
     "node": ">=6.13.0"
   },
   "scripts": {
+    "server": "server/server.js",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/server.js",
     "build": "webpack --config webpack.config.js",
