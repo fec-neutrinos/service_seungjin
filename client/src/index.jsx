@@ -3,10 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
-// import SearchBar from 'material-ui-search-bar'
-// import AutoComplete from 'material-ui/AutoComplete';
 import Autosuggest from 'react-autosuggest';
-// import $ from 'jquery';
 import css from '../dist/style.css';
 import Grid from '@material-ui/core/Grid';
 
@@ -17,10 +14,6 @@ function escapeRegexCharacters(str) {
 }
 
 function getSuggestions(value) {
-  // const escapedValue = escapeRegexCharacters(value.trim());
-  // const regex = new RegExp('^' + escapedValue, 'i');
-
-  // return languages.filter(language => regex.test(language.name));
 
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
@@ -34,32 +27,6 @@ function getSuggestions(value) {
       return term.toLowerCase().slice(0, inputLength) === inputValue;
     })
   });
-
-
-  // let temp = []
-
-  // const data = { input: value }
-  // fetch('/search', {
-  //   method: 'POST',
-  //   body: JSON.stringify(data),
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   }
-  // })
-  // .then(res => res.json())
-  // .then( (data) => {
-  //   return data.filter(product => {
-  //     return product.name.split(' ').some(term => {
-  //       return term.toLowerCase().slice(0, inputLength) === inputValue;
-  //     })
-  //   });
-  // })
-  // .then(response => console.log('success:', JSON.stringify(response)))
-  // .catch(err => console.error('error:', err));
-
-
-  // console.log("temp variable", temp);
-
 }
 
 
@@ -123,9 +90,6 @@ class App extends React.Component {
       .then(response => console.log('success:', JSON.stringify(response)))
       .catch(err => console.error('error:', err));
 
-    // this.setState({
-    //   suggestions: getSuggestions(value)
-    // });
   };
 
   onSuggestionsClearRequested = () => {
@@ -147,9 +111,6 @@ class App extends React.Component {
     };
 
 
-
-
-
     return (
       <div>
         <Grid container alignItems="flex-start" justify="flex-end" direction="row">
@@ -157,6 +118,7 @@ class App extends React.Component {
             edge="end"
             disableRipple
             color="inherit"
+            style={{outline: 'none'}}
             onClick={() => this.toggleSearch()}>
             <SearchIcon />
           </IconButton>
@@ -174,23 +136,10 @@ class App extends React.Component {
           inputProps={inputProps} />
         }
 
-
-
-
-
-
-
       </div>
     );
   }
-
-
 }
-
-
-
-
-
 
 
 
