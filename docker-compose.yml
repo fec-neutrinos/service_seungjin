@@ -3,9 +3,12 @@ services:
     mysql:
         build: ./database
         environment:
+            - MYSQL_DATABASE="fec"
             - MYSQL_ALLOW_EMPTY_PASSWORD=yes
         healthcheck:
             test: "exit 0"
+        ports:
+            - "3306:3306"
 
     myawesomeapp:
         build: .
@@ -14,5 +17,7 @@ services:
                 condition: service_healthy
         ports:
             - "3008:3008"
-        links:
-            - mysql
+        # # entrypoint:
+        # #     - /usr/local/bin/docker-entrypoint.sh
+        # links:
+        #     - mysql
